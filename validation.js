@@ -19,11 +19,11 @@
         }
 
         validate(value) {
-            return [...this.states.entries()].reduce((result, criterion) => {
-                if (criterion[1]) {
-                    if ( !this[criterion[0]].check(value) ) {
+            return [...this.states.entries()].reduce((result, [name, state]) => {
+                if (state) {
+                    if ( !this[name].check(value) ) {
                         result.valid = false;
-                        result.errors.set(criterion[0], this[criterion[0]].message(value));
+                        result.errors.set(name, this[name].message(value));
                     }
                 }
                 return result;
